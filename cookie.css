@@ -1,0 +1,20 @@
+body {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  background: #f7e9d7;
+}
+#cookie {
+  font-size: 100px;
+  cursor: pointer;
+  margin: 30px;
+  transition: transform 0.1s ease;
+}
+#cookie:active {
+  transform: scale(0.95);
+}
+button {
+  padding: 10px 20px;
+  font-size: 18px;
+  margin: 10px;
+  cursor: pointer;
+}
