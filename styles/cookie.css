@@ -1,6 +1,9 @@
 /* ===== BASE ===== */
 body {
-  font-family: Arial, sans-serif;
+  text-align: center;
+  font-family: lores-12, sans-serif;
+  font-style: normal;
+  font-weight: 400;
   background-image: url(../assets/65S.gif);
   background-size: cover;
   background-repeat: no-repeat;
@@ -24,10 +27,18 @@ h1 {
 /* ===== GAME DISPLAY ===== */
 #kibble {
   display: flex;
+}
+h1 {
+  font-family: rixvideogame-pro, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  color: rgb(15, 8, 9);
   justify-content: center;
   align-items: center;
   width: min(90%, 700px);
   margin: 30px auto;
+  width: 100%;
+  font-size: 50px;
   cursor: pointer;
   transition: transform 0.1s ease;
   will-change: transform;
@@ -143,19 +154,58 @@ body {
 
 /* Disposition responsive */
 .shop-buttons {
+.shop {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 20px;
 }
 
-/* Pour les écrans plus larges */
-@media (min-width: 768px) {
-  .shop-buttons {
-    flex-direction: row;
-    justify-content: center;
+.shop button {
+  margin: 5px;
+}
+
+/* Style de base pour les boutons */
+.upgrade-btn {
+  width: 100%;
+  background-color: #0891b2;
+  padding: 1rem;
+  border-radius: 9999px;
+  transition: all 0.2s;
+  text-align: center;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.upgrade-btn:active {
+  transform: scale(0.95);
+  background-color: #0e7490;
+}
+
+/* Disposition responsive */
+@media (max-width: 767px) {
+  /* Boutique en bas sur mobile */
+  aside {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
   }
 
-  .upgrade-btn {
-    min-width: 200px;
+  /* Espace pour éviter que le contenu soit caché */
+  main {
+    padding-bottom: 220px; /* Ajustez selon la hauteur de votre boutique */
+  }
+}
+
+@media (min-width: 768px) {
+  /* Boutique à droite sur desktop */
+  aside {
+    height: 100vh;
+    position: sticky;
+    top: 0;
   }
 }

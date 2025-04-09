@@ -1,52 +1,37 @@
 // ================ CONFIGURATION ================ //
 let kibbles = 0;
 let kibblesPerClick = 1;
+let doubleClickers = 0;
 let autoClickers = 0;
-let gifs = [];
-let lastThreshold = -1;
-let isMobile =
-  /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-    navigator.userAgent
+let multipliers = 0;
+let multiplierCost = 200;
+let gifs = [
+  { id: 1, name: "AngelicNyan", file: "AngelicNyan.gif", threshold: 0 },
+  { id: 2, name: "Cleo", file: "Cleo.gif", threshold: 50 },
+  { id: 3, name: "DemonicNyan", file: "DemonicNyan.gif", threshold: 100 },
+  { id: 4, name: "FancyNyan", file: "FancyNyan.gif", threshold: 200 },
+  { id: 5, name: "FiestaDog", file: "FiestaDog.gif", threshold: 300 },
+]; // Liste des GIFs chargée dynamiquement
+
+const kibbleDisplay = document.getElementById("kibble");
+const kibbleCount = document.getElementById("kibbleCount");
+const autoClickerCount = document.getElementById("autoClickers");
+const doubleClickerCount = document.getElementById("doubleClicker");
+const nyanCatGif = document.querySelector(".nyancatgif");
+let lastThreshold = -1; // Variable pour suivre le dernier palier atteint
+
+// Charger les GIFs depuis le fichier JSON
+fetch("data/nyancat.json")
+  .then((response) => response.json())
+  .then((data) => {
+    gifs = data;
+    updateGif(); // Met à jour le GIF initial
+  })
+  .catch((error) =>
+    console.error("Erreur lors du chargement des GIFs :", error)
   );
 
-// Éléments DOM
-const elements = {
-  kibbleDisplay: document.getElementById("kibble"),
-  kibbleCount: document.getElementById("kibbleCount"),
-  autoClickerCount: document.getElementById("autoClickers"),
-  doubleClickerCount: document.getElementById("doubleClicker"),
-  nyanCatGif: document.querySelector(".nyancatgif"),
-};
-
-// ================ CORE FUNCTIONS ================ //
-
-// Chargement des GIFs
-async function loadGifs() {
-  try {
-    const response = await fetch("data/nyancat.json");
-    gifs = await response.json();
-    preloadGifs(); // Préchargement pour meilleures performances
-    updateGif();
-  } catch (error) {
-    console.error("Erreur lors du chargement des GIFs :", error);
-    gifs = [{ id: 1, name: "Default", file: "nyan-cat.gif", threshold: 0 }];
-    updateGif();
-  }
-}
-
-// Préchargement des GIFs
-function preloadGifs() {
-  gifs.forEach((gif) => {
-    const img = new Image();
-    img.src = `assets/${gif.file}`;
-    if (gif.mobileFile) {
-      const mobileImg = new Image();
-      mobileImg.src = `assets/${gif.mobileFile}`;
-    }
-  });
-}
-
-// Mise à jour du GIF
+// Fonction pour mettre à jour le GIF
 function updateGif() {
   if (!gifs.length) return;
 
@@ -54,24 +39,15 @@ function updateGif() {
     .filter((gif) => kibbles >= gif.threshold)
     .sort((a, b) => b.threshold - a.threshold)[0];
 
-  if (currentGif && currentGif.threshold !== lastThreshold) {
-    console.log(`Nouveau palier: ${currentGif.threshold} - ${currentGif.file}`);
-    lastThreshold = currentGif.threshold;
-
-    // Utilisation de la version mobile si disponible
-    const gifFile =
-      isMobile && currentGif.mobileFile
-        ? currentGif.mobileFile
-        : currentGif.file;
-
-    elements.nyanCatGif.src = `assets/${gifFile}`;
-
-    // Animation
-    elements.kibbleDisplay.classList.add("celebrate");
-    setTimeout(
-      () => elements.kibbleDisplay.classList.remove("celebrate"),
-      1000
-    );
+  if (currentGif) {
+    // Vérifie si le palier a changé
+    if (currentGif.threshold !== lastThreshold) {
+      console.log(
+        `Nouveau palier atteint : ${currentGif.threshold} croquettes, affichage du GIF : ${currentGif.file}`
+      );
+      lastThreshold = currentGif.threshold; // Met à jour le dernier palier atteint
+    }
+    nyanCatGif.src = `assets/${currentGif.file}`;
   }
 }
 
@@ -101,46 +77,101 @@ function handleTap(e) {
   // Ajout des croquettes
   kibbles += kibblesPerClick;
   updateDisplay();
+});
+
+//================BOUTIQUE==================
+console.log(kibblesPerClick);
+// Clicker x2
+function buyDoubleClicker() {
+  const cost = 100;
+  if (kibbles >= cost) {
+    kibbles -= cost;
+    doubleClickers++;
+    kibblesPerClick *= 2;
+    updateDisplay();
+  } else {
+    alert("Tu n'as pas assez de croquettes !");
+  }
 }
 
-// Mise à jour de l'affichage
+document
+  .getElementById("doubleClickerBtn")
+  .addEventListener("click", buyDoubleClicker);
+
+// Autoclicker
+function buyAutoClicker() {
+  const cost = 50;
+  if (kibbles >= cost) {
+    kibbles -= cost;
+    autoClickers++;
+    updateDisplay();
+  } else {
+    alert("Tu n'as pas assez de croquettes !");
+  }
+}
+
+document
+  .getElementById("autoClickerBtn")
+  .addEventListener("click", buyAutoClicker);
+
+// Multiplicateur de croquettes
+
+function buyMultiplier() {
+  if (kibbles >= multiplierCost) {
+    kibbles -= multiplierCost;
+    multipliers++;
+    kibblesPerClick += 1; // Chaque multiplicateur augmente les croquettes par clic
+    updateDisplay();
+    multiplierCost = Math.floor(multiplierCost * 1.5); // Augmente le prix pour chaque nouvel achat
+    document.getElementById("multiplierCost").textContent =
+      "Prix : " + multiplierCost + " croquettes";
+    document.getElementById("multipliers").textContent =
+      "Nombre : " + multipliers;
+  } else {
+    alert("Tu n'as pas assez de croquettes !");
+  }
+}
+
+kibbleDisplay.addEventListener("click", (e) => {
+  kibbles += kibblesPerClick * (multipliers + 1);
+  updateDisplay();
+
+  // Créer une animation de croquette à la position du clic
+  const kibble = document.createElement("img");
+  kibble.src = "assets/kibble.png"; // Assure-toi que l'image existe
+  kibble.style.position = "absolute";
+  kibble.style.width = "30px"; // Largeur de l'image des croquettes
+  kibble.style.height = "30px"; // Hauteur de l'image des croquettes
+  kibble.style.left = `${e.pageX - 15}px`; // Position de l'élément au clic
+  kibble.style.top = `${e.pageY - 15}px`;
+  kibble.style.zIndex = "9999"; // Assurer que les croquettes soient au-dessus des autres éléments
+  document.body.appendChild(kibble);
+
+  // Animation: les croquettes montent et disparaissent
+  setTimeout(() => {
+    kibble.style.transition = "transform 1s ease-out";
+    kibble.style.transform = "translateY(-50px)"; // Déplacement vers le haut
+  }, 0);
+
+  // Retirer l'élément après l'animation
+  setTimeout(() => {
+    kibble.remove();
+  }, 1000);
+});
+// Boucle automatique
+setInterval(() => {
+  kibbles += autoClickers;
+  updateDisplay();
+}, 1000); // par seconde
+
+// MAJ affichage
 function updateDisplay() {
-  elements.kibbleCount.textContent = Math.floor(kibbles);
-  elements.autoClickerCount.textContent = autoClickers;
-  elements.doubleClickerCount.textContent = kibblesPerClick;
-  updateGif();
+  kibbleCount.textContent = kibbles;
+  autoClickerCount.textContent = autoClickers;
+  doubleClickerCount.textContent = doubleClickers; // Corrigez ici pour afficher correctement
+  updateGif(); // Vérifie et met à jour le GIF
 }
 
-// Boucle de jeu
-function startGameLoop() {
-  let lastUpdate = performance.now();
-
-  function gameLoop(timestamp) {
-    const delta = (timestamp - lastUpdate) / 1000; // en secondes
-    lastUpdate = timestamp;
-
-    if (autoClickers > 0) {
-      kibbles += autoClickers * delta * (isMobile ? 0.5 : 1);
-      updateDisplay();
-    }
-
-    requestAnimationFrame(gameLoop);
-  }
-
-  requestAnimationFrame(gameLoop);
-}
-
-// ================ INITIALISATION ================ //
-function init() {
-  loadGifs();
-  setupEventListeners();
-  startGameLoop();
-
-  // Optimisation mobile
-  if (isMobile) {
-    document.body.classList.add("mobile");
-    console.log("Mode mobile activé");
-  }
-}
-
-init();
+document.getElementById("shopToggle").addEventListener("click", function () {
+  document.getElementById("shopPanel").classList.toggle("hidden");
+});
