@@ -1,7 +1,10 @@
 body {
   text-align: center;
   font-family: Arial, sans-serif;
-  background: #f70a69;
+  background-image: url(../assets/65S.gif);
+  background-size: 100%;
+  background-repeat: no-repeat;
+
 }
 #kibble {
   display: flex;
