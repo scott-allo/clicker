@@ -2,26 +2,80 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nyan Cat Clicker</title>
+
+    <!------------TAILWIND CSS & CSS-->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script>
+      (function (d) {
+        var config = {
+            kitId: "ubh7uba",
+            scriptTimeout: 3000,
+            async: true,
+          },
+          h = d.documentElement,
+          t = setTimeout(function () {
+            h.className =
+              h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+          }, config.scriptTimeout),
+          tk = d.createElement("script"),
+          f = false,
+          s = d.getElementsByTagName("script")[0],
+          a;
+        h.className += " wf-loading";
+        tk.src = "https://use.typekit.net/" + config.kitId + ".js";
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+          a = this.readyState;
+          if (f || (a && a != "complete" && a != "loaded")) return;
+          f = true;
+          clearTimeout(t);
+          try {
+            Typekit.load(config);
+          } catch (e) {}
+        };
+        s.parentNode.insertBefore(tk, s);
+      })(document);
+    </script>
     <link rel="stylesheet" href="styles/cookie.css" />
+
+    <!------------SCRIPTS JS & JQUERY-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="scripts/cookie.js" defer></script>
+    <script src="scripts/shop.js"></script>
   </head>
-  <body>
-    <h1>Nyan Cat Clicker</h1>
-    <h2>Croquettes : <span id="kibbleCount">0</span></h2>
+  <body class="bg-black text-white text-center">
+    <h1 class="text-3xl font-bold my-4">Nyan Cat Clicker</h1>
+    <h2 class="text-xl">Croquettes : <span id="kibbleCount">0</span></h2>
 
-    <div id="kibble">
-      <img class="nyancatgif" src="assets/nyan-cat.gif" alt="Nyan Cat" />
-    </div>
+    <section class="gamedisplay my-8 object-contain" id="kibble">
+      <img
+        class="nyancatgif cursor-pointer mx-auto"
+        src="assets/nyan-cat.gif"
+        alt="Nyan Cat cliquable pour gagner des croquettes"
+      />
+    </section>
 
-    <button onclick="buyAutoClicker()">
-      Acheter un AutoClicker (coût : 50)
-    </button>
-    <p>AutoClickers : <span id="autoClickers">0</span></p>
+    <section class="shop grid grid-cols-2 gap-4 max-w-md mx-auto" id="shop">
+      <button
+        class="bg-cyan-500 hover:bg-cyan-600 shadow-lg shadow-cyan-500/50 rounded-full p-2 transition"
+        onclick="buyAutoClicker()"
+      >
+        Acheter un AutoClicker (coût : 50 croquettes)
+      </button>
+      <p>AutoClickers : <span id="autoClickers">0</span></p>
 
-    <button onclick="buyDoubleClicker()">
-      Acheter un DoubleClicker (coût : 100)
-    </button>
-    <p>DoubleClickers : <span id="doubleClicker">0</span></p>
+      <button
+        class="bg-cyan-500 hover:bg-cyan-600 shadow-lg shadow-cyan-500/50 rounded-full p-2 transition"
+        onclick="buyDoubleClicker()"
+      >
+        Acheter un DoubleClicker (coût : 100 croquettes)
+      </button>
+      <p>DoubleClickers : <span id="doubleClicker">0</span></p>
+    </section>
+
+    <script src="scripts/cookie.js" defer></script>
+    <script src="scripts/shop.js" defer></script>
   </body>
 </html>

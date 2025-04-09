@@ -1,42 +1,123 @@
+/* ===== BASE ===== */
 body {
-  text-align: center;
   font-family: Arial, sans-serif;
   background-image: url(../assets/65S.gif);
-  background-size: 100%;
+  background-size: cover;
   background-repeat: no-repeat;
-
+  background-attachment: fixed;
+  min-height: 100vh;
+  margin: 0;
+  color: white;
+  text-align: center;
 }
+
+/* ===== TYPOGRAPHY ===== */
+h1 {
+  font-family: rixvideogame-pro, sans-serif;
+  font-weight: 400;
+  font-size: clamp(40px, 10vw, 100px);
+  line-height: 1.2;
+  margin: 20px 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* ===== GAME DISPLAY ===== */
 #kibble {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 70%;
-  font-size: 100px;
+  width: min(90%, 700px);
+  margin: 30px auto;
   cursor: pointer;
-  margin: 30px;
   transition: transform 0.1s ease;
+  will-change: transform;
 }
+
 #kibble:active {
   transform: scale(0.95);
-}
-button {
-  padding: 10px 20px;
-  font-size: 18px;
-  margin: 10px;
-  cursor: pointer;
 }
 
 .nyancatgif {
   width: 100%;
+  max-width: 500px;
 }
 
-.boutique {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
+/* ===== SHOP ===== */
+.shop {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  width: min(90%, 600px);
+  margin: 20px auto;
 }
 
-.boutique button {
-  margin: 5px;
+.shop button {
+  padding: 12px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 50px;
+  background-color: #06b6d4;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.shop button:hover {
+  background-color: #0891b2;
+  transform: translateY(-2px);
+}
+
+.shop button:active {
+  transform: translateY(1px);
+}
+
+/* Animations */
+.celebrate {
+  animation: celebrate 0.5s ease;
+}
+
+@keyframes celebrate {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.game-message {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  z-index: 100;
+}
+
+.purchased {
+  animation: pulse 0.5s;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+/* ===== MEDIA QUERIES ===== */
+@media (max-width: 600px) {
+  .shop {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
 }
