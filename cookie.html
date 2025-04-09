@@ -2,15 +2,17 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <title>Cookie Clicker by Olive</title>
-    <link rel="stylesheet" href="cookie.css" />
-    <script src="cookie.js" defer></script>
+    <title>Nyan Cat Clicker</title>
+    <link rel="stylesheet" href="styles/cookie.css" />
+    <script src="scripts/cookie.js" defer></script>
   </head>
   <body>
-    <h1>🍪 Cookie Clicker</h1>
-    <h2>Cookies : <span id="cookieCount">0</span></h2>
+    <h1>Nyan Cat Clicker</h1>
+    <h2>Croquettes : <span id="kibbleCount">0</span></h2>
 
-    <div id="cookie">👾</div>
+    <div id="kibble">
+      <img class="nyancatgif" src="assets/nyan-cat.gif" alt="Nyan Cat" />
+    </div>
 
     <button onclick="buyAutoClicker()">
       Acheter un AutoClicker (coût : 50)
@@ -20,6 +22,6 @@
     <button onclick="buyDoubleClicker()">
       Acheter un DoubleClicker (coût : 100)
     </button>
-    <p>DoubleClickers : <span id="doubleClickers">0</span></p>
+    <p>DoubleClickers : <span id="doubleClicker">0</span></p>
   </body>
 </html>
