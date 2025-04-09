@@ -2,7 +2,10 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <title>Nyan Cat Clicker</title>
 
     <!------------TAILWIND CSS & CSS-->
@@ -43,10 +46,12 @@
     <!------------SCRIPTS JS & JQUERY-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="scripts/cookie.js" defer></script>
-    <script src="scripts/shop.js"></script>
+    <script src="scripts/shop.js" defer></script>
   </head>
+
   <body class="bg-black text-white text-center">
     <h1 class="text-3xl font-bold my-4">Nyan Cat Clicker</h1>
+
     <h2 class="text-xl">Croquettes : <span id="kibbleCount">0</span></h2>
 
     <section class="gamedisplay my-8 object-contain" id="kibble">
@@ -57,25 +62,41 @@
       />
     </section>
 
-    <section class="shop grid grid-cols-2 gap-4 max-w-md mx-auto" id="shop">
-      <button
-        class="bg-cyan-500 hover:bg-cyan-600 shadow-lg shadow-cyan-500/50 rounded-full p-2 transition"
-        onclick="buyAutoClicker()"
-      >
-        Acheter un AutoClicker (coût : 50 croquettes)
-      </button>
-      <p>AutoClickers : <span id="autoClickers">0</span></p>
+    <section
+      class="shop-buttons grid grid-cols-2 gap-4 max-w-md mx-auto"
+      id="shop"
+    >
+      <div class="upgrade-item">
+        <button
+          class="upgrade-btn bg-cyan-500 hover:bg-cyan-600 shadow-lg shadow-cyan-500/50 rounded-full p-2 transition"
+          onclick="buyAutoClicker()"
+        >
+          <span class="upgrade-name">Acheter un AutoClicker</span>
+          <span class="upgrade-cost" id="autoClickerCost"
+            >Prix : 50 croquettes</span
+          >
+          <span class="upgrade-amount" id="autoClickers">Nombre : 0</span>
+        </button>
+      </div>
 
+      <div class="upgrade-item">
+        <button
+          class="upgrade-btn bg-cyan-500 hover:bg-cyan-600 shadow-lg shadow-cyan-500/50 rounded-full p-2 transition"
+          onclick="buyClicker()"
+        >
+          <span class="upgrade-name">Acheter un Double Clicker</span>
+          <span class="upgrade-cost" id="clickerCost"
+            >Prix : 100 croquettes</span
+          >
+          <span class="upgrade-amount" id="clickers">Nombre : 0</span>
+        </button>
+      </div>
       <button
         class="bg-cyan-500 hover:bg-cyan-600 shadow-lg shadow-cyan-500/50 rounded-full p-2 transition"
         onclick="buyDoubleClicker()"
       >
         Acheter un DoubleClicker (coût : 100 croquettes)
       </button>
-      <p>DoubleClickers : <span id="doubleClicker">0</span></p>
     </section>
-
-    <script src="scripts/cookie.js" defer></script>
-    <script src="scripts/shop.js" defer></script>
   </body>
 </html>
