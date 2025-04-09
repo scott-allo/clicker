@@ -1,12 +1,15 @@
 let kibbles = 0;
 let kibblesPerClick = 1;
+let doubleClickers = 0;
 let autoClickers = 0;
+let multipliers = 0;
+let multiplierCost = 200;
 let gifs = [
-  { "id": 1, "name": "AngelicNyan", "file": "AngelicNyan.gif", "threshold": 0 },
-  { "id": 2, "name": "Cleo", "file": "Cleo.gif", "threshold": 50 },
-  { "id": 3, "name": "DemonicNyan", "file": "DemonicNyan.gif", "threshold": 100 },
-  { "id": 4, "name": "FancyNyan", "file": "FancyNyan.gif", "threshold": 200 },
-  { "id": 5, "name": "FiestaDog", "file": "FiestaDog.gif", "threshold": 300 }
+  { id: 1, name: "AngelicNyan", file: "AngelicNyan.gif", threshold: 0 },
+  { id: 2, name: "Cleo", file: "Cleo.gif", threshold: 50 },
+  { id: 3, name: "DemonicNyan", file: "DemonicNyan.gif", threshold: 100 },
+  { id: 4, name: "FancyNyan", file: "FancyNyan.gif", threshold: 200 },
+  { id: 5, name: "FiestaDog", file: "FiestaDog.gif", threshold: 300 },
 ]; // Liste des GIFs chargée dynamiquement
 
 const kibbleDisplay = document.getElementById("kibble");
@@ -23,7 +26,9 @@ fetch("data/nyancat.json")
     gifs = data;
     updateGif(); // Met à jour le GIF initial
   })
-  .catch((error) => console.error("Erreur lors du chargement des GIFs :", error));
+  .catch((error) =>
+    console.error("Erreur lors du chargement des GIFs :", error)
+  );
 
 // Fonction pour mettre à jour le GIF
 function updateGif() {
@@ -35,7 +40,9 @@ function updateGif() {
   if (currentGif) {
     // Vérifie si le palier a changé
     if (currentGif.threshold !== lastThreshold) {
-      console.log(`Nouveau palier atteint : ${currentGif.threshold} croquettes, affichage du GIF : ${currentGif.file}`);
+      console.log(
+        `Nouveau palier atteint : ${currentGif.threshold} croquettes, affichage du GIF : ${currentGif.file}`
+      );
       lastThreshold = currentGif.threshold; // Met à jour le dernier palier atteint
     }
     nyanCatGif.src = `assets/${currentGif.file}`;
@@ -49,18 +56,23 @@ kibbleDisplay.addEventListener("click", () => {
 });
 
 //================BOUTIQUE==================
-
+console.log(kibblesPerClick);
 // Clicker x2
 function buyDoubleClicker() {
   const cost = 100;
   if (kibbles >= cost) {
     kibbles -= cost;
+    doubleClickers++;
     kibblesPerClick *= 2;
     updateDisplay();
   } else {
     alert("Tu n'as pas assez de croquettes !");
   }
 }
+
+document
+  .getElementById("doubleClickerBtn")
+  .addEventListener("click", buyDoubleClicker);
 
 // Autoclicker
 function buyAutoClicker() {
@@ -74,6 +86,54 @@ function buyAutoClicker() {
   }
 }
 
+document
+  .getElementById("autoClickerBtn")
+  .addEventListener("click", buyAutoClicker);
+
+// Multiplicateur de croquettes
+
+function buyMultiplier() {
+  if (kibbles >= multiplierCost) {
+    kibbles -= multiplierCost;
+    multipliers++;
+    kibblesPerClick += 1; // Chaque multiplicateur augmente les croquettes par clic
+    updateDisplay();
+    multiplierCost = Math.floor(multiplierCost * 1.5); // Augmente le prix pour chaque nouvel achat
+    document.getElementById("multiplierCost").textContent =
+      "Prix : " + multiplierCost + " croquettes";
+    document.getElementById("multipliers").textContent =
+      "Nombre : " + multipliers;
+  } else {
+    alert("Tu n'as pas assez de croquettes !");
+  }
+}
+
+kibbleDisplay.addEventListener("click", (e) => {
+  kibbles += kibblesPerClick * (multipliers + 1);
+  updateDisplay();
+
+  // Créer une animation de croquette à la position du clic
+  const kibble = document.createElement("img");
+  kibble.src = "assets/kibble.png"; // Assure-toi que l'image existe
+  kibble.style.position = "absolute";
+  kibble.style.width = "30px"; // Largeur de l'image des croquettes
+  kibble.style.height = "30px"; // Hauteur de l'image des croquettes
+  kibble.style.left = `${e.pageX - 15}px`; // Position de l'élément au clic
+  kibble.style.top = `${e.pageY - 15}px`;
+  kibble.style.zIndex = "9999"; // Assurer que les croquettes soient au-dessus des autres éléments
+  document.body.appendChild(kibble);
+
+  // Animation: les croquettes montent et disparaissent
+  setTimeout(() => {
+    kibble.style.transition = "transform 1s ease-out";
+    kibble.style.transform = "translateY(-50px)"; // Déplacement vers le haut
+  }, 0);
+
+  // Retirer l'élément après l'animation
+  setTimeout(() => {
+    kibble.remove();
+  }, 1000);
+});
 // Boucle automatique
 setInterval(() => {
   kibbles += autoClickers;
@@ -84,6 +144,10 @@ setInterval(() => {
 function updateDisplay() {
   kibbleCount.textContent = kibbles;
   autoClickerCount.textContent = autoClickers;
-  doubleClickerCount.textContent = kibblesPerClick; // Corrigez ici pour afficher correctement
+  doubleClickerCount.textContent = doubleClickers; // Corrigez ici pour afficher correctement
   updateGif(); // Vérifie et met à jour le GIF
 }
+
+document.getElementById("shopToggle").addEventListener("click", function () {
+  document.getElementById("shopPanel").classList.toggle("hidden");
+});
