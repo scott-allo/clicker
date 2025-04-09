@@ -1,0 +1,42 @@
+body {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  background-image: url(../assets/65S.gif);
+  background-size: 100%;
+  background-repeat: no-repeat;
+
+}
+#kibble {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  font-size: 100px;
+  cursor: pointer;
+  margin: 30px;
+  transition: transform 0.1s ease;
+}
+#kibble:active {
+  transform: scale(0.95);
+}
+button {
+  padding: 10px 20px;
+  font-size: 18px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.nyancatgif {
+  width: 100%;
+}
+
+.boutique {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.boutique button {
+  margin: 5px;
+}
