@@ -1,4 +1,3 @@
-// ================ CONFIGURATION ================ //
 let kibbles = 0;
 let kibblesPerClick = 1;
 let doubleClickers = 0;
@@ -33,9 +32,8 @@ fetch("data/nyancat.json")
 
 // Fonction pour mettre à jour le GIF
 function updateGif() {
-  if (!gifs.length) return;
-
-  const currentGif = [...gifs]
+  // Trouve le GIF avec le plus grand seuil inférieur ou égal à kibbles
+  const currentGif = gifs
     .filter((gif) => kibbles >= gif.threshold)
     .sort((a, b) => b.threshold - a.threshold)[0];
 
@@ -51,30 +49,8 @@ function updateGif() {
   }
 }
 
-// ================ GAME LOGIC ================ //
-
-// Gestion des clics
-function setupEventListeners() {
-  elements.kibbleDisplay.addEventListener("touchstart", handleTap, {
-    passive: true,
-  });
-  elements.kibbleDisplay.addEventListener("click", handleTap);
-}
-
-let lastTap = 0;
-function handleTap(e) {
-  // Empêche les doubles déclenchements
-  const now = Date.now();
-  if (now - lastTap < 300) return;
-  lastTap = now;
-
-  e.preventDefault();
-
-  // Feedback visuel
-  elements.kibbleDisplay.classList.add("tap-effect");
-  setTimeout(() => elements.kibbleDisplay.classList.remove("tap-effect"), 200);
-
-  // Ajout des croquettes
+// Clique manuel
+kibbleDisplay.addEventListener("click", () => {
   kibbles += kibblesPerClick;
   updateDisplay();
 });
