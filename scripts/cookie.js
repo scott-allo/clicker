@@ -14,6 +14,14 @@ const doubleClickerCount = document.getElementById("doubleClicker");
 const nyanCatGif = document.querySelector(".nyancatgif");
 let lastThreshold = -1; // Variable pour suivre le dernier palier atteint
 
+// Charger le score depuis le localStorage au démarrage
+if (localStorage.getItem("kibbles")) {
+  kibbles = parseInt(localStorage.getItem("kibbles"), 10); // Récupère et convertit en nombre
+  updateDisplay(); // Met à jour l'affichage avec la valeur restaurée
+} else {
+  updateDisplay(); // Assure que l'affichage est mis à jour même si aucune donnée n'est trouvée
+}
+
 // Charger les GIFs depuis le fichier JSON
 fetch("data/nyancat.json")
   .then((response) => response.json())
@@ -47,6 +55,7 @@ function updateGif() {
 // Clique manuel
 kibbleDisplay.addEventListener("click", () => {
   kibbles += kibblesPerClick;
+  saveScore(); // Sauvegarde immédiate
   updateDisplay();
 });
 
@@ -57,6 +66,7 @@ function buyDoubleClicker() {
   const cost = 100;
   if (kibbles >= cost) {
     kibbles -= cost;
+    saveScore(); // Sauvegarde immédiate
     doubleClickers++;
     kibblesPerClick *= 2;
     updateDisplay();
@@ -74,6 +84,7 @@ function buyAutoClicker() {
   const cost = 50;
   if (kibbles >= cost) {
     kibbles -= cost;
+    saveScore(); // Sauvegarde immédiate
     autoClickers++;
     updateDisplay();
   } else {
@@ -90,10 +101,11 @@ document
 function buyMultiplier() {
   if (kibbles >= multiplierCost) {
     kibbles -= multiplierCost;
+    saveScore(); // Sauvegarde immédiate
     multipliers++;
     kibblesPerClick += 1; // Chaque multiplicateur augmente les croquettes par clic
     updateDisplay();
-    multiplierCost = Math.floor(multiplierCost * 1.5); // Augmente le prix pour chaque nouvel achat
+    multiplierCost = Math.floor(multiplierCost * 3); // Augmente le prix pour chaque nouvel achat
     document.getElementById("multiplierCost").textContent =
       "Prix : " + multiplierCost + " croquettes";
     document.getElementById("multipliers").textContent =
@@ -132,17 +144,27 @@ kibbleDisplay.addEventListener("click", (e) => {
 // Boucle automatique
 setInterval(() => {
   kibbles += autoClickers;
+  saveScore(); // Sauvegarde immédiate
   updateDisplay();
 }, 1000); // par seconde
 
+// Sauvegarder le score dans le localStorage
+function saveScore() {
+  localStorage.setItem("kibbles", kibbles); // Sauvegarde la valeur actuelle de kibbles
+}
+
 // MAJ affichage
 function updateDisplay() {
-  kibbleCount.textContent = kibbles;
-  autoClickerCount.textContent = autoClickers;
-  doubleClickerCount.textContent = doubleClickers; // Corrigez ici pour afficher correctement
+  kibbleCount.textContent = kibbles; // Met à jour l'affichage des croquettes
+  autoClickerCount.textContent = autoClickers; // Met à jour l'affichage des autoclickers
+  doubleClickerCount.textContent = doubleClickers; // Met à jour l'affichage des double clickers
   updateGif(); // Vérifie et met à jour le GIF
+  saveScore(); // Sauvegarde le score dans le localStorage
 }
 
 document.getElementById("shopToggle").addEventListener("click", function () {
   document.getElementById("shopPanel").classList.toggle("hidden");
 });
+
+// Sauvegarder le score à intervalles réguliers (par exemple, toutes les 5 secondes)
+setInterval(saveScore, 5000);
