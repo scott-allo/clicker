@@ -4,13 +4,8 @@ let doubleClickers = 0;
 let autoClickers = 0;
 let multipliers = 0;
 let multiplierCost = 200;
-let gifs = [
-  { id: 1, name: "AngelicNyan", file: "AngelicNyan.gif", threshold: 0 },
-  { id: 2, name: "Cleo", file: "Cleo.gif", threshold: 50 },
-  { id: 3, name: "DemonicNyan", file: "DemonicNyan.gif", threshold: 100 },
-  { id: 4, name: "FancyNyan", file: "FancyNyan.gif", threshold: 200 },
-  { id: 5, name: "FiestaDog", file: "FiestaDog.gif", threshold: 300 },
-]; // Liste des GIFs chargée dynamiquement
+
+ // Liste des GIFs chargée dynamiquement
 
 const kibbleDisplay = document.getElementById("kibble");
 const kibbleCount = document.getElementById("kibbleCount");
