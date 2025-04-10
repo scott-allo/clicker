@@ -1,6 +1,6 @@
 function createKibbleAnimation(e) {
   const kibble = document.createElement("img");
-  kibble.src = "assets/kibble.png";
+  kibble.src = "assets/kibble/kibble.png"; // Chemin mis à jour
   kibble.style.position = "absolute";
   kibble.style.width = "30px";
   kibble.style.height = "30px";
