@@ -21,6 +21,6 @@ function updateGif() {
 
   if (currentGif && currentGif.threshold !== lastThreshold) {
     lastThreshold = currentGif.threshold;
-    nyanCatGif.src = `assets/${currentGif.file}`;
+    nyanCatGif.src = `assets/skins/${currentGif.file}`;
   }
 }
