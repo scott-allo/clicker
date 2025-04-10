@@ -3,7 +3,12 @@
 
   { "id": 2, "name": "Cleo", "file": "Cleo.gif", "threshold": 50 },
 
-  { "id": 3, "name": "DemonicNyan", "file": "DemonicNyan.gif", "threshold": 100 },
+  {
+    "id": 3,
+    "name": "DemonicNyan",
+    "file": "DemonicNyan.gif",
+    "threshold": 100
+  },
 
   { "id": 4, "name": "FancyNyan", "file": "FancyNyan.gif", "threshold": 200 },
 
@@ -17,29 +22,69 @@
 
   { "id": 9, "name": "NyanDisc", "file": "Nyan_disc.gif", "threshold": 1500 },
 
-  { "id": 10, "name": "NyanJoris", "file": "nyan_Joris.png", "threshold": 2000 },
+  {
+    "id": 10,
+    "name": "NyanJoris",
+    "file": "nyan_Joris.png",
+    "threshold": 2000
+  },
 
   { "id": 11, "name": "NyanOreo", "file": "Nyan_Oreo.gif", "threshold": 3000 },
 
   { "id": 12, "name": "NyanCat", "file": "nyan-cat.gif", "threshold": 5000 },
 
-  { "id": 13, "name": "NyanBoy", "file": "NyanBoy.gif" },
+  { "id": 13, "name": "NyanBoy", "file": "NyanBoy.gif", "threshold": 6000 },
 
-  { "id": 14, "name": "NyaninjaOld", "file": "NyaninjaOld.gif" },
+  {
+    "id": 14,
+    "name": "NyaninjaOld",
+    "file": "NyaninjaOld.gif",
+    "threshold": 7000
+  },
 
-  { "id": 15, "name": "OriginalNyan", "file": "OriginalNyan.gif" },
+  {
+    "id": 15,
+    "name": "OriginalNyan",
+    "file": "OriginalNyan.gif",
+    "threshold": 8000
+  },
 
-  { "id": 16, "name": "PumpkinOreo", "file": "PumpkinOreo.gif" },
+  {
+    "id": 16,
+    "name": "PumpkinOreo",
+    "file": "PumpkinOreo.gif",
+    "threshold": 9000
+  },
 
-  { "id": 17, "name": "Rasta", "file": "Rasta.gif" },
+  { "id": 17, "name": "Rasta", "file": "Rasta.gif", "threshold": 10000 },
 
-  { "id": 18, "name": "SurfingNyan", "file": "SurfingNyan.gif" },
+  {
+    "id": 18,
+    "name": "SurfingNyan",
+    "file": "SurfingNyan.gif",
+    "threshold": 11000
+  },
 
-  { "id": 19, "name": "TechnyancolorOreo", "file": "TechnyancolorOreo.gif" },
+  {
+    "id": 19,
+    "name": "TechnyancolorOreo",
+    "file": "TechnyancolorOreo.gif",
+    "threshold": 12000
+  },
 
-  { "id": 20, "name": "TerraNyan", "file": "TerraNyan.gif" },
+  {
+    "id": 20,
+    "name": "TerraNyan",
+    "file": "TerraNyan.gif",
+    "threshold": 13000
+  },
 
-  { "id": 21, "name": "ToasterDog", "file": "ToasterDog.gif" },
-  
-  { "id": 22, "name": "VdayOreo", "file": "VdayOreo.gif" }
+  {
+    "id": 21,
+    "name": "ToasterDog",
+    "file": "ToasterDog.gif",
+    "threshold": 14000
+  },
+
+  { "id": 22, "name": "VdayOreo", "file": "VdayOreo.gif", "threshold": 15000 }
 ]
