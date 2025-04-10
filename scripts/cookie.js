@@ -4,7 +4,7 @@ let doubleClickers = 0;
 let autoClickers = 0;
 let multipliers = 0;
 let multiplierCost = 200;
-
+let gifs = []; // Liste des GIFs chargée dynamiquement
  // Liste des GIFs chargée dynamiquement
 
 const kibbleDisplay = document.getElementById("kibble");
