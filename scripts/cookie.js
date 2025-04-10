@@ -5,7 +5,7 @@ let autoClickers = 0;
 let multipliers = 0;
 let multiplierCost = 200;
 let gifs = []; // Liste des GIFs chargée dynamiquement
- // Liste des GIFs chargée dynamiquement
+// Liste des GIFs chargée dynamiquement
 
 const kibbleDisplay = document.getElementById("kibble");
 const kibbleCount = document.getElementById("kibbleCount");
@@ -14,13 +14,22 @@ const doubleClickerCount = document.getElementById("doubleClicker");
 const nyanCatGif = document.querySelector(".nyancatgif");
 let lastThreshold = -1; // Variable pour suivre le dernier palier atteint
 
-// Charger le score depuis le localStorage au démarrage
+// Charger les données depuis le localStorage au démarrage
 if (localStorage.getItem("kibbles")) {
-  kibbles = parseInt(localStorage.getItem("kibbles"), 10); // Récupère et convertit en nombre
-  updateDisplay(); // Met à jour l'affichage avec la valeur restaurée
-} else {
-  updateDisplay(); // Assure que l'affichage est mis à jour même si aucune donnée n'est trouvée
+  kibbles = parseInt(localStorage.getItem("kibbles"), 10);
 }
+if (localStorage.getItem("autoClickers")) {
+  autoClickers = parseInt(localStorage.getItem("autoClickers"), 10);
+}
+if (localStorage.getItem("doubleClickers")) {
+  doubleClickers = parseInt(localStorage.getItem("doubleClickers"), 10);
+}
+if (localStorage.getItem("multipliers")) {
+  multipliers = parseInt(localStorage.getItem("multipliers"), 10);
+}
+
+// Mettre à jour l'affichage après restauration
+updateDisplay();
 
 // Charger les GIFs depuis le fichier JSON
 fetch("data/nyancat.json")
@@ -148,9 +157,13 @@ setInterval(() => {
   updateDisplay();
 }, 1000); // par seconde
 
-// Sauvegarder le score dans le localStorage
+// Sauvegarder les données dans le localStorage
 function saveScore() {
-  localStorage.setItem("kibbles", kibbles); // Sauvegarde la valeur actuelle de kibbles
+  console.log("Sauvegarde en cours : kibbles =", kibbles);
+  localStorage.setItem("kibbles", kibbles);
+  localStorage.setItem("autoClickers", autoClickers);
+  localStorage.setItem("doubleClickers", doubleClickers);
+  localStorage.setItem("multipliers", multipliers);
 }
 
 // MAJ affichage
@@ -158,6 +171,8 @@ function updateDisplay() {
   kibbleCount.textContent = kibbles; // Met à jour l'affichage des croquettes
   autoClickerCount.textContent = autoClickers; // Met à jour l'affichage des autoclickers
   doubleClickerCount.textContent = doubleClickers; // Met à jour l'affichage des double clickers
+  document.getElementById("multipliers").textContent =
+    "Nombre : " + multipliers; // Met à jour les multiplicateurs
   updateGif(); // Vérifie et met à jour le GIF
   saveScore(); // Sauvegarde le score dans le localStorage
 }
