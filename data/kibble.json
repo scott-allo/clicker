@@ -1,5 +1,12 @@
 [ 
     {
+        "id": 0,
+        "name": "Croquette Sushi",
+        "file": "assets/kibble/kibble.png",
+        "cost": 0,
+        "description": "Une croquette sushi pour nourrir votre Nyan Cat."
+      },
+    {
       "id": 1,
       "name": "Croquette Sushi",
       "file": "assets/kibble/cute-pixel-sushi-h0oqoy19kl5p9afr.png",

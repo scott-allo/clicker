@@ -1,15 +1,15 @@
-let activeKibbleImage = "assets/kibble/kibble.png"; // Image par défaut
+let activeKibbleImage = "assets/kibble/kibble.png";// Image par défaut
 
 function createKibbleAnimation(e) {
   // Vérifie si une nouvelle image a été définie
-  if (!activeKibbleImage || activeKibbleImage === "assets/kibble/kibble.png") {
-    console.error("Aucune image active définie ou image par défaut utilisée.");
-    return; // Ne crée pas l'animation si l'image par défaut est encore active
+  if (!activeKibbleImage) {
+    console.error("Aucune image active définie.");
+    return;
   }
 
   // Crée une instance unique de l'image pour chaque clic
   const kibble = document.createElement("img");
-  kibble.src = activeKibbleImage;
+  kibble.src = activeKibbleImage; // Utilise l'image active
   kibble.draggable = false; // Désactive le glissement
   kibble.style.position = "absolute";
   kibble.style.width = "30px";
