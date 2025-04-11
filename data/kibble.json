@@ -1,0 +1,23 @@
+[ 
+    {
+      "id": 1,
+      "name": "Croquette Sushi",
+      "file": "assets/kibble/cute-pixel-sushi-h0oqoy19kl5p9afr.png",
+      "cost": 50,
+      "description": "Une croquette sushi pour nourrir votre Nyan Cat."
+    },
+    {
+      "id": 2,
+      "name": "Croquette Pizza",
+      "file": "assets/kibble/pixelated-pizza-slice-mnnv1kmtzkyb4wso.png",
+      "cost": 200,
+      "description": "Una piccola crochetta alla pizza per il tuo Nyan Cat."
+    },
+    {
+      "id": 3,
+      "name": "Croquette Macaron",
+      "file": "assets/kibble/pink_-pixel_-art_-smile-png-whsn0fd30swnw6l3.png",
+      "cost": 500,
+      "description": "Une croquette délicate, parfaite pour les Nyan Cats exigeants."
+    }
+  ]

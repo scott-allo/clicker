@@ -176,6 +176,31 @@ button:active,
   transform: scale(0.95);
 }
 
+/* Styles pour les croquettes dans la boutique */
+.kibble-item {
+  border: 2px solid var(--accent);
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.kibble-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px var(--accent);
+}
+
+.kibble-item.active-skin {
+  border-color: lime;
+  box-shadow: 0 0 15px lime;
+}
+
+.buy-kibble-btn {
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.buy-kibble-btn:active {
+  transform: scale(0.95);
+}
+
 /* GIFs */
 .nyancatgif {
   width: 100%;
@@ -209,6 +234,21 @@ aside h3 {
 aside button {
   width: 100%;
   margin-bottom: 1rem;
+}
+
+/* Images */
+img {
+  border: none; /* Supprime toute bordure */
+  outline: none; /* Supprime tout contour */
+  box-shadow: none; /* Supprime toute ombre */
+}
+
+.kibble-animation {
+  all: unset; /* Réinitialise tous les styles */
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  pointer-events: none;
 }
 
 /* ================== */
@@ -260,3 +300,5 @@ aside button {
     margin-top: 0;
   }
 }
+
+
