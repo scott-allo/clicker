@@ -131,5 +131,49 @@
     "name": "VdayOreo",
     "file": "skins/VdayOreo.gif",
     "threshold": 15000
+  },
+
+  {
+    "id": 22,
+    "name": "VdayOreo",
+    "file": "skins/giphy.gif",
+    "threshold": 16000
+  },
+  {
+    "id": 22,
+    "name": "VdayOreo",
+    "file": "skins/pianotimes.gif",
+    "threshold": 17000
+  },
+  {
+    "id": 22,
+    "name": "VdayOreo",
+    "file": "skins/palatati.gif",
+    "threshold": 18000
+  },
+  {
+    "id": 22,
+    "name": "VdayOreo",
+    "file": "skins/catsdrive.gif",
+    "threshold": 19000
+  },
+  {
+    "id": 22,
+    "name": "VdayOreo",
+    "file": "skins/sabrinacats.gif",
+    "threshold": 20000
+  },
+  {
+    "id": 22,
+    "name": "VdayOreo",
+    "file": "skins/oiiaooiiia.gif",
+    "threshold": 21000
+  },
+  {
+    "id": 22,
+    "name": "VdayOreo",
+    "file": "skins/cat-dancing.gif",
+    "threshold": 22000
   }
+
 ]
