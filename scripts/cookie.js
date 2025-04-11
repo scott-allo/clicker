@@ -5,7 +5,7 @@ let autoClickers = 0;
 let multipliers = 0;
 let multiplierCost = 200;
 let gifs = []; // Liste des GIFs chargée dynamiquement
-// Liste des GIFs chargée dynamiquement
+
 
 const kibbleDisplay = document.getElementById("kibble");
 const kibbleCount = document.getElementById("kibbleCount");
@@ -183,3 +183,21 @@ document.getElementById("shopToggle").addEventListener("click", function () {
 
 // Sauvegarder le score à intervalles réguliers (par exemple, toutes les 5 secondes)
 setInterval(saveScore, 5000);
+
+// Réinitialiser le jeu
+function resetGame() {
+  if (confirm("Es-tu sûr de vouloir réinitialiser la partie ? Cette action est irréversible.")) {
+    kibbles = 0;
+    kibblesPerClick = 1;
+    autoClickers = 0;
+    doubleClickers = 0;
+    multipliers = 0;
+    multiplierCost = 200;
+    localStorage.clear(); // Supprime toutes les données sauvegardées
+    updateDisplay(); // Met à jour l'affichage
+    alert("La partie a été réinitialisée !");
+  }
+}
+
+// Ajouter un écouteur d'événement pour le bouton de reset
+document.getElementById("resetGameBtn").addEventListener("click", resetGame);

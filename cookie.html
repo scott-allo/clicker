@@ -54,81 +54,92 @@
   </head>
 
   <body class="bg-gray-900 text-white touch-manipulation wf-loading">
-    <div class="flex flex-col md:flex-row min-h-screen">
-      <!-- Zone de jeu principale -->
-      <main class="flex-1 p-4 md:w-3/4 md:max-w-3xl md:mx-auto">
-        <h1 class="text-4xl font-bold mb-4">Nyan Cat Clicker</h1>
+    <div class="game-container">
+      <div class="flex flex-col md:flex-row min-h-screen">
+        <!-- Zone de jeu principale -->
+        <main class="flex-1 p-4 md:w-3/4 md:max-w-3xl md:mx-auto">
+          <h1 class="text-4xl font-bold mb-4">Nyan Cat Clicker</h1>
 
-        <h2 class="text-3xl font-bold my-4 bg-dark-900 p-4">
-          Croquettes : <span id="kibbleCount">0</span>
-        </h2>
+          <h2 class="text-3xl font-bold my-4 bg-dark-900 p-4">
+            Croquettes : <span id="kibbleCount">0</span>
+          </h2>
 
-        <section class="gamedisplay my-8 mx-auto" id="kibble">
-          <img
-            class="nyancatgif cursor-pointer mx-auto select-none"
-            src="assets/nyan-cat.gif"
-            alt="Nyan Cat cliquable pour gagner des croquettes"
-            draggable="false"
-          />
-        </section>
-      </main>
+          <section class="gamedisplay my-8 mx-auto" id="kibble">
+            <img
+              class="nyancatgif cursor-pointer mx-auto select-none"
+              src="assets/nyan-cat.gif"
+              alt="Nyan Cat cliquable pour gagner des croquettes"
+              draggable="false"
+            />
+          </section>
+        </main>
 
-      <!-- Bouton toggle mobile -->
-      <button
-        id="shopToggle"
-        class="md:hidden fixed right-4 bottom-4 bg-purple-700 p-4 rounded-full z-50 shadow-lg"
-      >
-        🛍️
-      </button>
+        <!-- Bouton toggle mobile -->
+        <button
+          id="shopToggle"
+          class="md:hidden fixed right-4 bottom-4 bg-purple-700 p-4 rounded-full z-50 shadow-lg"
+        >
+          🛍️
+        </button>
 
-      <!-- Boutique côté droit -->
+        <!-- Boutique côté droit -->
 
-      <aside
-        id="shopPanel"
-        class="fixed inset-y-0 right-0 w-72 bg-purple-900 p-6 transform translate-x-full md:translate-x-0 md:relative transition-transform duration-300 z-40 overflow-y-auto"
-      >
-        <h3 class="text-2xl font-bold mb-6 text-center">Boutique</h3>
-        <p class="text-center text-sm mb-4 italic text-gray-300">
-          Dépense tes croquettes pour booster ta production !
-        </p>
+        <aside
+          id="shopPanel"
+          class="fixed inset-y-0 right-0 w-72 bg-purple-900 p-6 transform translate-x-full md:translate-x-0 md:relative transition-transform duration-300 z-40 overflow-y-auto"
+        >
+          <h3 class="text-2xl font-bold mb-6 text-center">Boutique</h3>
+          <p class="text-center text-sm mb-4 italic text-gray-300">
+            Dépense tes croquettes pour booster ta production !
+          </p>
 
-        <div class="space-y-4">
+          <div class="space-y-4">
+            <button
+              id="autoClickerBtn"
+              class="upgrade-btn w-full bg-cyan-600 hover:bg-cyan-700 active:bg-cyan-800 shadow-lg shadow-cyan-500/50 rounded-xl p-4 transition-all active:scale-[0.98]"
+            >
+              <div class="font-bold text-lg">🐾 AutoClicker</div>
+              <div>Coût : <span id="autoClickerCost">50</span> croquettes</div>
+              <div>Quantité possédée : <span id="autoClickers">0</span></div>
+            </button>
+
+            <button
+              id="doubleClickerBtn"
+              class="upgrade-btn w-full bg-cyan-600 hover:bg-cyan-700 active:bg-cyan-800 shadow-lg shadow-cyan-500/50 rounded-xl p-4 transition-all active:scale-[0.98]"
+            >
+              <div class="font-bold text-lg">⚡ DoubleClicker</div>
+              <div>
+                Coût : <span id="doubleClickerCost">100</span> croquettes
+              </div>
+              <div>
+                Multiplicateur (x2 par clic) — Possédé :
+                <span id="doubleClicker">0</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="upgrade-item mt-6">
+            <button
+              class="upgrade-btn bg-cyan-500 hover:bg-cyan-600 shadow-lg shadow-cyan-500/50 rounded-full p-3 w-full transition"
+              onclick="buyMultiplier()"
+            >
+              <div class="font-bold text-lg">✨ Multiplicateur global</div>
+              <div class="text-sm">Augmente toutes les croquettes générées</div>
+              <div class="mt-1">
+                Coût : <span id="multiplierCost">200</span> croquettes
+              </div>
+              <div>Quantité : <span id="multipliers">0</span></div>
+            </button>
+          </div>
+
           <button
-            id="autoClickerBtn"
-            class="upgrade-btn w-full bg-cyan-600 hover:bg-cyan-700 active:bg-cyan-800 shadow-lg shadow-cyan-500/50 rounded-xl p-4 transition-all active:scale-[0.98]"
+            id="resetGameBtn"
+            class="upgrade-btn w-full bg-red-600 hover:bg-red-700 active:bg-red-800 shadow-lg shadow-red-500/50 rounded-xl p-4 transition-all active:scale-[0.98]"
           >
-            <div class="font-bold text-lg">🐾 AutoClicker</div>
-            <div>Coût : <span id="autoClickerCost">50</span> croquettes</div>
-            <div>Quantité possédée : <span id="autoClickers">0</span></div>
+            Réinitialiser la partie
           </button>
-
-          <button
-            id="doubleClickerBtn"
-            class="upgrade-btn w-full bg-cyan-600 hover:bg-cyan-700 active:bg-cyan-800 shadow-lg shadow-cyan-500/50 rounded-xl p-4 transition-all active:scale-[0.98]"
-          >
-            <div class="font-bold text-lg">⚡ DoubleClicker</div>
-            <div>Coût : <span id="doubleClickerCost">100</span> croquettes</div>
-            <div>
-              Multiplicateur (x2 par clic) — Possédé :
-              <span id="doubleClicker">0</span>
-            </div>
-          </button>
-        </div>
-
-        <div class="upgrade-item mt-6">
-          <button
-            class="upgrade-btn bg-cyan-500 hover:bg-cyan-600 shadow-lg shadow-cyan-500/50 rounded-full p-3 w-full transition"
-            onclick="buyMultiplier()"
-          >
-            <div class="font-bold text-lg">✨ Multiplicateur global</div>
-            <div class="text-sm">Augmente toutes les croquettes générées</div>
-            <div class="mt-1">
-              Coût : <span id="multiplierCost">200</span> croquettes
-            </div>
-            <div>Quantité : <span id="multipliers">0</span></div>
-          </button>
-        </div>
-      </aside>
+        </aside>
+      </div>
     </div>
 
     <script>
