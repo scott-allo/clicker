@@ -5,6 +5,7 @@ let autoClickers = 0;
 let multipliers = 0;
 let multiplierCost = 200;
 let gifs = []; // Liste des GIFs chargée dynamiquement
+let activeKibbleImage = "assets/kibble/kibble.png"; // Image active par défaut
 
 const kibbleDisplay = document.getElementById("kibble");
 const kibbleCount = document.getElementById("kibbleCount");
@@ -61,10 +62,31 @@ function updateGif() {
 }
 
 // Clique manuel
-kibbleDisplay.addEventListener("click", () => {
-  kibbles += kibblesPerClick;
-  saveScore(); // Sauvegarde immédiate
+kibbleDisplay.addEventListener("click", (e) => {
+  kibbles += kibblesPerClick * (multipliers + 1);
   updateDisplay();
+
+  // Créer une animation de croquette à la position du clic
+  const kibble = document.createElement("img");
+  kibble.src = activeKibbleImage; // Utilise l'image active
+  kibble.style.position = "absolute";
+  kibble.style.width = "30px"; // Largeur de l'image des croquettes
+  kibble.style.height = "30px"; // Hauteur de l'image des croquettes
+  kibble.style.left = `${e.pageX - 15}px`; // Position de l'élément au clic
+  kibble.style.top = `${e.pageY - 15}px`;
+  kibble.style.zIndex = "9999"; // Assurer que les croquettes soient au-dessus des autres éléments
+  document.body.appendChild(kibble);
+
+  // Animation: les croquettes montent et disparaissent
+  setTimeout(() => {
+    kibble.style.transition = "transform 1s ease-out";
+    kibble.style.transform = "translateY(-50px)"; // Déplacement vers le haut
+  }, 0);
+
+  // Retirer l'élément après l'animation
+  setTimeout(() => {
+    kibble.remove();
+  }, 1000);
 });
 
 //================BOUTIQUE==================
@@ -123,32 +145,6 @@ function buyMultiplier() {
   }
 }
 
-kibbleDisplay.addEventListener("click", (e) => {
-  kibbles += kibblesPerClick * (multipliers + 1);
-  updateDisplay();
-
-  // Créer une animation de croquette à la position du clic
-  const kibble = document.createElement("img");
-  kibble.src = "assets/kibble/kibble.png"; // Assure-toi que l'image existe
-  kibble.style.position = "absolute";
-  kibble.style.width = "30px"; // Largeur de l'image des croquettes
-  kibble.style.height = "30px"; // Hauteur de l'image des croquettes
-  kibble.style.left = `${e.pageX - 15}px`; // Position de l'élément au clic
-  kibble.style.top = `${e.pageY - 15}px`;
-  kibble.style.zIndex = "9999"; // Assurer que les croquettes soient au-dessus des autres éléments
-  document.body.appendChild(kibble);
-
-  // Animation: les croquettes montent et disparaissent
-  setTimeout(() => {
-    kibble.style.transition = "transform 1s ease-out";
-    kibble.style.transform = "translateY(-50px)"; // Déplacement vers le haut
-  }, 0);
-
-  // Retirer l'élément après l'animation
-  setTimeout(() => {
-    kibble.remove();
-  }, 1000);
-});
 // Boucle automatique
 setInterval(() => {
   kibbles += autoClickers;
@@ -229,13 +225,13 @@ function loadKibbleShop() {
         kibbleShop.appendChild(kibbleItem);
       });
 
-      // Masquer le kibble par défaut si un autre skin est actif
+      // Supprimer le kibble par défaut si un autre skin est actif
       if (activeKibbleImage !== "assets/kibble/kibble.png") {
         const defaultKibble = document.querySelector(
           '.kibble-item img[src="assets/kibble/kibble.png"]'
         );
         if (defaultKibble) {
-          defaultKibble.closest(".kibble-item").style.display = "none";
+          defaultKibble.closest(".kibble-item").remove();
         }
       }
 
@@ -269,21 +265,15 @@ function buyKibbleSkin(kibbleId, kibblesData) {
     // Mettre à jour l'image active pour les clics
     activeKibbleImage = selectedKibble.file;
 
-    // Marquer le skin comme actif
-    document.querySelectorAll(".kibble-item").forEach((item) => {
-      item.classList.remove("active-skin");
-    });
-    document
-      .querySelector(`[data-id="${kibbleId}"]`)
-      .closest(".kibble-item")
-      .classList.add("active-skin");
+    // Mettre à jour l'image affichée pour les clics
+    updateClickImage();
 
-    // Masquer le kibble par défaut
+    // Supprimer le skin par défaut de la boutique
     const defaultKibble = document.querySelector(
       '.kibble-item img[src="assets/kibble/kibble.png"]'
     );
     if (defaultKibble) {
-      defaultKibble.closest(".kibble-item").style.display = "none";
+      defaultKibble.closest(".kibble-item").remove();
     }
 
     updateDisplay();
@@ -292,6 +282,9 @@ function buyKibbleSkin(kibbleId, kibblesData) {
   }
 }
 
-function updateClickImage(imageFile) {
-  activeKibbleImage = imageFile; // Met uniquement à jour l'image active pour les clics
+function updateClickImage() {
+  const kibbleElement = document.querySelector("#kibble img");
+  if (kibbleElement) {
+    kibbleElement.src = activeKibbleImage; // Met à jour l'image affichée
+  }
 }
