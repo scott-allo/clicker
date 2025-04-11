@@ -90,7 +90,10 @@
     "threshold": 7000
   },
 
-  { "id": 17, "name": "Rasta", "file": "Rasta.gif", "threshold": 10000 },
+  { "id": 17, 
+  "name": "Rasta", 
+  "file": "skins/Rasta.gif", 
+  "threshold": 7500 },
 
   {
     "id": 18,
@@ -109,7 +112,7 @@
   {
     "id": 20,
     "name": "JorisNyan",
-    "file": "skins/JorisNyan.gif",
+    "file": "skins/JojoNyan.gif",
     "threshold": 10000
   },
 
@@ -129,43 +132,43 @@
 
   {
     "id": 22,
-    "name": "VdayOreo",
+    "name": "Giphy",
     "file": "skins/giphy.gif",
     "threshold": 13000
   },
   {
     "id": 22,
-    "name": "VdayOreo",
+    "name": "pianotimes",
     "file": "skins/pianotimes.gif",
     "threshold": 14000
   },
   {
     "id": 22,
-    "name": "VdayOreo",
+    "name": "palatati",
     "file": "skins/palatati.gif",
     "threshold": 15000
   },
   {
     "id": 22,
-    "name": "VdayOreo",
+    "name": "catsdrive",
     "file": "skins/catsdrive.gif",
     "threshold": 16000
   },
   {
     "id": 22,
-    "name": "VdayOreo",
+    "name": "sabrinacats",
     "file": "skins/sabrinacats.gif",
     "threshold": 17000
   },
   {
     "id": 22,
-    "name": "VdayOreo",
+    "name": "oiiiaooiiia",
     "file": "skins/oiiaooiiia.gif",
     "threshold": 18000
   },
   {
     "id": 22,
-    "name": "VdayOreo",
+    "name": "cat-dancing",
     "file": "skins/cat-dancing.gif",
     "threshold": 19000
   }

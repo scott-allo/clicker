@@ -6,7 +6,6 @@ let multipliers = 0;
 let multiplierCost = 200;
 let gifs = []; // Liste des GIFs chargée dynamiquement
 
-
 const kibbleDisplay = document.getElementById("kibble");
 const kibbleCount = document.getElementById("kibbleCount");
 const autoClickerCount = document.getElementById("autoClickers");
@@ -130,7 +129,7 @@ kibbleDisplay.addEventListener("click", (e) => {
 
   // Créer une animation de croquette à la position du clic
   const kibble = document.createElement("img");
-  kibble.src = "assets/kibble.png"; // Assure-toi que l'image existe
+  kibble.src = "assets/kibble/kibble.png"; // Assure-toi que l'image existe
   kibble.style.position = "absolute";
   kibble.style.width = "30px"; // Largeur de l'image des croquettes
   kibble.style.height = "30px"; // Hauteur de l'image des croquettes
@@ -201,3 +200,98 @@ function resetGame() {
 
 // Ajouter un écouteur d'événement pour le bouton de reset
 document.getElementById("resetGameBtn").addEventListener("click", resetGame);
+
+// Charger la boutique de skins au démarrage
+loadKibbleShop();
+
+function loadKibbleShop() {
+  fetch("data/kibble.json")
+    .then((response) => response.json())
+    .then((kibbles) => {
+      const kibbleShop = document.getElementById("kibbleShop");
+      kibbleShop.innerHTML = ""; // Réinitialise la boutique
+
+      kibbles.forEach((kibble) => {
+        const kibbleItem = document.createElement("div");
+        kibbleItem.className =
+          "kibble-item bg-purple-800 p-4 rounded-lg shadow-lg text-center";
+
+        kibbleItem.innerHTML = `
+          <img src="${kibble.file}" alt="${kibble.name}" class="w-16 h-16 mx-auto mb-2" />
+          <h4 class="font-bold text-lg">${kibble.name}</h4>
+          <p class="text-sm italic mb-2">${kibble.description}</p>
+          <p class="font-bold mb-2">Coût : ${kibble.cost} croquettes</p>
+          <button class="buy-kibble-btn bg-cyan-600 hover:bg-cyan-700 text-white py-2 px-4 rounded-lg" data-id="${kibble.id}">
+            Acheter
+          </button>
+        `;
+
+        kibbleShop.appendChild(kibbleItem);
+      });
+
+      // Masquer le kibble par défaut si un autre skin est actif
+      if (activeKibbleImage !== "assets/kibble/kibble.png") {
+        const defaultKibble = document.querySelector(
+          '.kibble-item img[src="assets/kibble/kibble.png"]'
+        );
+        if (defaultKibble) {
+          defaultKibble.closest(".kibble-item").style.display = "none";
+        }
+      }
+
+      // Ajouter des écouteurs d'événements pour les boutons d'achat
+      document.querySelectorAll(".buy-kibble-btn").forEach((button) => {
+        button.addEventListener("click", (e) => {
+          const kibbleId = parseInt(e.target.dataset.id, 10);
+          buyKibbleSkin(kibbleId, kibbles);
+        });
+      });
+    })
+    .catch((error) =>
+      console.error("Erreur lors du chargement des skins de croquettes :", error)
+    );
+}
+
+// Fonction pour acheter un skin de croquette
+function buyKibbleSkin(kibbleId, kibblesData) {
+  const selectedKibble = kibblesData.find((kibble) => kibble.id === kibbleId);
+
+  if (!selectedKibble) {
+    alert("Skin introuvable !");
+    return;
+  }
+
+  if (kibbles >= selectedKibble.cost) {
+    kibbles -= selectedKibble.cost;
+    saveScore();
+    alert(`Félicitations ! Vous avez acheté le skin "${selectedKibble.name}"`);
+
+    // Mettre à jour l'image active pour les clics
+    activeKibbleImage = selectedKibble.file;
+
+    // Marquer le skin comme actif
+    document.querySelectorAll(".kibble-item").forEach((item) => {
+      item.classList.remove("active-skin");
+    });
+    document
+      .querySelector(`[data-id="${kibbleId}"]`)
+      .closest(".kibble-item")
+      .classList.add("active-skin");
+
+    // Masquer le kibble par défaut
+    const defaultKibble = document.querySelector(
+      '.kibble-item img[src="assets/kibble/kibble.png"]'
+    );
+    if (defaultKibble) {
+      defaultKibble.closest(".kibble-item").style.display = "none";
+    }
+
+    updateDisplay();
+  } else {
+    alert("Tu n'as pas assez de croquettes pour acheter ce skin !");
+  }
+}
+
+function updateClickImage(imageFile) {
+  activeKibbleImage = imageFile; // Met uniquement à jour l'image active pour les clics
+}
