@@ -2,175 +2,175 @@
   {
     "id": 1,
     "name": "OriginalNyan",
-    "file": "skins/OriginalNyan.gif",
+    "file": "assets/skins/OriginalNyan.gif",
     "threshold": 0
   },
-
-  { "id": 2, "name": "Cleo", "file": "skins/Cleo.gif", "threshold": 50 },
-
+  {
+    "id": 2,
+    "name": "Cleo",
+    "file": "assets/skins/Cleo.gif",
+    "threshold": 50
+  },
   {
     "id": 3,
     "name": "DemonicNyan",
-    "file": "skins/DemonicNyan.gif",
+    "file": "assets/skins/DemonicNyan.gif",
     "threshold": 100
   },
-
   {
     "id": 4,
     "name": "FancyNyan",
-    "file": "skins/FancyNyan.gif",
+    "file": "assets/skins/FancyNyan.gif",
     "threshold": 200
   },
-
   {
     "id": 5,
     "name": "FiestaDog",
-    "file": "skins/FiestaDog.gif",
+    "file": "assets/skins/FiestaDog.gif",
     "threshold": 300
   },
-
-  { "id": 6, "name": "Grumpy", "file": "skins/Grumpy.gif", "threshold": 500 },
-
-  { "id": 7, "name": "Magical", "file": "skins/Magical.gif", "threshold": 750 },
-
+  {
+    "id": 6,
+    "name": "Grumpy",
+    "file": "assets/skins/Grumpy.gif",
+    "threshold": 500
+  },
+  {
+    "id": 7,
+    "name": "Magical",
+    "file": "assets/skins/Magical.gif",
+    "threshold": 750
+  },
   {
     "id": 8,
     "name": "MelonCoon",
-    "file": "skins/MelonCoon.gif",
+    "file": "assets/skins/MelonCoon.gif",
     "threshold": 1000
   },
-
   {
     "id": 9,
     "name": "NyanDisc",
-    "file": "skins/Nyan_disc.gif",
+    "file": "assets/skins/Nyan_disc.gif",
     "threshold": 1500
   },
-
   {
     "id": 10,
     "name": "TerraNyan",
-    "file": "skins/TerraNyan.gif",
+    "file": "assets/skins/TerraNyan.gif",
     "threshold": 2000
   },
-
   {
     "id": 11,
     "name": "NyanOreo",
-    "file": "skins/Nyan_Oreo.gif",
+    "file": "assets/skins/Nyan_Oreo.gif",
     "threshold": 3000
   },
-
-
+  {
+    "id": 12,
+    "name": "Nyaninja",
+    "file": "assets/skins/NyaninjaOld.gif",
+    "threshold": 3500
+  },
   {
     "id": 13,
     "name": "NyanBoy",
-    "file": "skins/NyanBoy.gif",
+    "file": "assets/skins/NyanBoy.gif",
     "threshold": 4000
   },
-
   {
     "id": 14,
     "name": "NyaninjaOld",
-    "file": "skins/NyaninjaOld.gif",
+    "file": "assets/skins/NyaninjaOld.gif",
     "threshold": 5000
   },
-
   {
     "id": 15,
     "name": "AngelicNyan",
-    "file": "skins/AngelicNyan.gif",
+    "file": "assets/skins/AngelicNyan.gif",
     "threshold": 6000
   },
-
   {
     "id": 16,
     "name": "PumpkinOreo",
-    "file": "skins/PumpkinOreo.gif",
+    "file": "assets/skins/PumpkinOreo.gif",
     "threshold": 7000
   },
-
-  { "id": 17, 
-  "name": "Rasta", 
-  "file": "skins/Rasta.gif", 
-  "threshold": 7500 },
-
+  {
+    "id": 17,
+    "name": "Rasta",
+    "file": "assets/skins/Rasta.gif",
+    "threshold": 7500
+  },
   {
     "id": 18,
     "name": "SurfingNyan",
-    "file": "skins/SurfingNyan.gif",
+    "file": "assets/skins/SurfingNyan.gif",
     "threshold": 8000
   },
-
   {
     "id": 19,
     "name": "ToasterDog",
-    "file": "skins/ToasterDog.gif",
+    "file": "assets/skins/ToasterDog.gif",
     "threshold": 9000
   },
-
   {
     "id": 20,
     "name": "JorisNyan",
-    "file": "skins/JojoNyan.gif",
+    "file": "assets/skins/JojoNyan.gif",
     "threshold": 10000
   },
-
   {
     "id": 21,
     "name": "TechnyancolorOreo",
-    "file": "skins/TechnyancolorOreo.gif",
+    "file": "assets/skins/TechnyancolorOreo.gif",
     "threshold": 11000
   },
-
   {
     "id": 22,
     "name": "VdayOreo",
-    "file": "skins/VdayOreo.gif",
+    "file": "assets/skins/VdayOreo.gif",
     "threshold": 12000
   },
-
   {
-    "id": 22,
+    "id": 23,
     "name": "Giphy",
-    "file": "skins/giphy.gif",
+    "file": "assets/skins/giphy.gif",
     "threshold": 13000
   },
   {
-    "id": 22,
+    "id": 24,
     "name": "pianotimes",
-    "file": "skins/pianotimes.gif",
+    "file": "assets/skins/pianotimes.gif",
     "threshold": 14000
   },
   {
-    "id": 22,
+    "id": 25,
     "name": "palatati",
-    "file": "skins/palatati.gif",
+    "file": "assets/skins/palatati.gif",
     "threshold": 15000
   },
   {
-    "id": 22,
+    "id": 26,
     "name": "catsdrive",
-    "file": "skins/catsdrive.gif",
+    "file": "assets/skins/catsdrive.gif",
     "threshold": 16000
   },
   {
-    "id": 22,
+    "id": 27,
     "name": "sabrinacats",
-    "file": "skins/sabrinacats.gif",
+    "file": "assets/skins/sabrinacats.gif",
     "threshold": 17000
   },
   {
-    "id": 22,
+    "id": 28,
     "name": "oiiiaooiiia",
-    "file": "skins/oiiaooiiia.gif",
+    "file": "assets/skins/oiiaooiiia.gif",
     "threshold": 18000
   },
   {
-    "id": 22,
+    "id": 29,
     "name": "cat-dancing",
-    "file": "skins/cat-dancing.gif",
+    "file": "assets/skins/cat-dancing.gif",
     "threshold": 19000
   }
-
 ]
