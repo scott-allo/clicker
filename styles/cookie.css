@@ -1,304 +1,560 @@
-/* ================ */
-/* VARIABLES & ROOTS */
-/* ================ */
+/* ==================== */
+/* IMPORTS DE POLICES */
+/* ==================== */
+@import url("https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+/* ==================== */
+/* VARIABLES CSS */
+/* ==================== */
 :root {
-  --primary: #ff00ff; /* Rose néon */
-  --secondary: #0f1b1b; /* Cyan néon */
-  --accent: #ffcc00; /* Jaune rétro */
-  --dark: #1a1a1a; /* Noir profond */
-  --text: #ffffff; /* Blanc pur */
-  --highlight: #ff5555; /* Rouge néon */
-  --shadow: rgba(0, 0, 0, 0.8); /* Ombre sombre */
-
-  /* Tailles */
-  --header-size: 3rem;
-  --button-radius: 8px; /* Bordures carrées pour un effet pixelisé */
+  --color-primary: #4f46e5;
+  --color-success: #10b981;
+  --color-error: #ef4444;
+  --color-warning: #facc15;
+  --color-bg-dark: rgba(20, 20, 30, 0.92);
 }
 
-/* =========== */
-/* BASE STYLES */
-/* =========== */
-/* Effet pixelisé */
-body {
-  font-family: "lores-12", sans-serif;
-  font-size: 1rem;
-  background: linear-gradient(
-    -45deg,
-    #00eff8,
-    #f800b4,
-    #ebf503,
-    #02f6c1,
-    #00eff8,
-    #9400f8
-  );
-  background-size: 400% 400%;
-  animation: gradient 15s ease infinite;
-
-  /* Disposition */
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  will-change: background-position;
-
-  color: var(--text);
-  text-shadow: 2px 2px var(--shadow); /* Ombre pixelisée */
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-}
-
-/* ============= */
-/* ANIMATIONS CSS */
-/* ============= */
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  25% {
-    background-position: 50% 100%;
+/* ==================== */
+/* ANIMATIONS GLOBALES */
+/* ==================== */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
   }
   50% {
-    background-position: 100% 50%;
-  }
-  75% {
-    background-position: 50% 0%;
-  }
-  100% {
-    background-position: 0% 50%;
+    transform: translateY(-12px);
   }
 }
 
 @keyframes pulse {
-  0% {
-    opacity: 0.7;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.2;
-    transform: scale(1.05);
-  }
-  100% {
-    opacity: 0.7;
-    transform: scale(1);
-  }
-}
-
-/* Animation glitch */
-@keyframes glitch {
-  0% {
-    text-shadow: 2px 2px var(--highlight), -2px -2px var(--accent);
-  }
-  25% {
-    text-shadow: -2px -2px var(--primary), 2px 2px var(--secondary);
-  }
-  50% {
-    text-shadow: 2px -2px var(--highlight), -2px 2px var(--accent);
-  }
-  75% {
-    text-shadow: -2px 2px var(--primary), 2px -2px var(--secondary);
-  }
-  100% {
-    text-shadow: 2px 2px var(--highlight), -2px -2px var(--accent);
-  }
-}
-
-/* Animation scintillement */
-@keyframes flicker {
   0%,
   100% {
     opacity: 1;
   }
   50% {
-    opacity: 0.8;
+    opacity: 0.85;
   }
 }
 
-/* ========== */
-/* COMPONENTS */
-/* ========== */
-/* Titre principal */
-h1 {
-  font-family: "rixvideogame-pro", sans-serif;
-  font-size: var(--header-size);
-  color: var(--secondary);
-  text-shadow: 4px 4px var(--primary), 0 0 10px var(--accent);
-  margin: 2rem 0;
-  animation: glitch 1s infinite;
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
-/* Boutons rétro */
-button,
-.upgrade-btn {
-  font-family: "lores-12", sans-serif;
-  font-size: 0.9rem;
-  padding: 1rem;
-  margin: 0.5rem;
-  background: var(--dark);
-  color: var(--text);
-  border: 4px solid var(--accent);
-  border-radius: var(--button-radius);
-  box-shadow: 4px 4px var(--shadow);
-  text-transform: uppercase;
+@keyframes clickEffect {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+@keyframes kibble-float {
+  from {
+    transform: translate(-50%, -50%) translate(0, 0) rotate(0deg);
+    opacity: 1;
+    filter: brightness(1);
+  }
+  to {
+    transform: translate(-50%, -50%) translate(var(--x-end), var(--y-end))
+      rotate(var(--rotation));
+    opacity: 0;
+    filter: brightness(0.5);
+  }
+}
+
+@keyframes kibble-bounce {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes toastSlideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes toastStay {
+  from,
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes toastFadeOut {
+  to {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+}
+
+@keyframes rainbowGlow {
+  0% {
+    filter: hue-rotate(0deg) brightness(1.1);
+  }
+  100% {
+    filter: hue-rotate(360deg) brightness(1.1);
+  }
+}
+
+/* ==================== */
+/* STRUCTURE DE BASE */
+/* ==================== */
+body {
+  background: linear-gradient(-45deg, #00eff8, #f800b4, #ebf503, #02f6c1);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  min-height: 100vh;
+  margin: 0;
+  font-family: "Silkscreen", cursive;
+  color: white;
+  overflow-x: hidden;
+  touch-action: manipulation;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* Assurez-vous que le body et html occupent toute la hauteur */
+}
+
+/* ==================== */
+/* ÉLÉMENTS DE JEU PRINCIPAUX */
+/* ==================== */
+.nyancatgif {
+  max-width: 500px;
+  width: 100%;
+  animation: float 3.5s ease-in-out infinite, pulse 2s infinite;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4));
 }
 
-button:hover,
-.upgrade-btn:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px var(--shadow);
+.nyancatgif:active {
+  transform: scale(0.95);
+  transition: transform 0.1s;
 }
 
-button:active,
-.upgrade-btn:active {
-  transform: translate(2px, 2px);
-  box-shadow: 2px 2px var(--shadow);
+.game-header {
+  margin-top: 5rem; /* Ajustez la marge pour tous les écrans */
+  text-align: center;
 }
 
-/* Conteneurs */
-.shop {
+.game-header h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  animation: pulse 2s infinite;
+  margin-bottom: 1rem; /* Espacement entre le titre principal et le sous-titre */
+}
+
+.game-header h2 {
+  font-size: 2rem;
+  margin-top: 1rem;
+  color: var(--color-warning);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 12px;
+  border: 2px solid var(--color-warning);
+}
+
+#kibbleCount {
+  display: inline-block;
+  animation: kibble-bounce 0.3s ease-in-out;
+}
+
+/* ==================== */
+/* ANIMATIONS DES CROQUETTES */
+/* ==================== */
+.kibble-main-animation {
+  transition: transform 0.3s ease-out;
+  will-change: transform;
+}
+
+.kibble-particle {
+  position: absolute;
+  animation-timing-function: cubic-bezier(0.3, 0.7, 0.4, 1);
+  pointer-events: none;
+}
+
+/* ==================== */
+/* BOUTIQUE & SKINS */
+/* ==================== */
+#shopPanel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%; /* Par défaut, occupe toute la largeur sur mobile */
+  max-width: 400px; /* Limite la largeur sur desktop */
+  height: 100vh; /* Occupe toute la hauteur */
+  background-color: #1a1a2e; /* Fond principal harmonisé */
+  color: #ffffff; /* Texte principal */
+  transform: translateX(
+    100%
+  ); /* Masque le shop en le déplaçant hors de l'écran */
+  transition: transform 0.3s ease-in-out;
+  z-index: 1000; /* Assurez-vous qu'il est au-dessus des autres éléments */
+  overflow-y: auto; /* Permet le défilement si le contenu dépasse la hauteur */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Ajoute une ombre pour le style */
+  border-left: 4px solid #4f46e5; /* Accent bleu électrique */
+}
+
+#shopPanel.open {
+  transform: translateX(0); /* Affiche le shop lorsqu'il a la classe "open" */
+}
+
+#shopPanel h3 {
+  color: #ffcc00; /* Titre en jaune doré */
+  text-align: center;
+  font-family: "Press Start 2P", monospace; /* Police rétro */
+  margin-bottom: 1rem;
+}
+
+#shopPanel button {
+  font-family: "Press Start 2P", monospace;
+  background-color: #ffcc00; /* Boutons actifs en jaune doré */
+  color: #1a1a2e; /* Texte des boutons en bleu foncé */
+  border: 2px solid #4f46e5; /* Bordure bleu électrique */
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+#shopPanel button:hover {
+  background-color: #4f46e5; /* Change la couleur au survol */
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+#shopPanel button:disabled {
+  background-color: #ff5733; /* Boutons désactivés en orange vif */
+  color: #ffffff;
+  cursor: not-allowed;
+}
+
+#shopPanel p {
+  font-size: 0.9rem;
+  color: #cccccc; /* Texte gris clair */
+  margin-top: 0.5rem;
+  text-align: center;
+  line-height: 1.4;
+}
+
+#kibbleShop {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(150px, 1fr)
+  ); /* Grille responsive */
+  gap: 1rem; /* Espacement entre les éléments */
+  padding: 1rem; /* Espacement interne */
+}
+
+.kibble-item {
+  background-color: rgba(255, 255, 255, 0.1); /* Fond semi-transparent */
+  border: 2px solid #ffcc00; /* Bordure jaune doré */
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 2rem;
-}
-
-/* Croquettes */
-#kibble {
-  padding: 1rem;
-  margin: 1rem auto;
-  display: inline-block;
-
-  transition: transform 0.2s;
-}
-
-#kibble:active {
-  transform: scale(0.95);
-}
-
-/* Styles pour les croquettes dans la boutique */
-.kibble-item {
-  border: 2px solid var(--accent);
-  text-align: center;
+  justify-content: center;
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .kibble-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.kibble-image {
+  width: 48px; /* Taille réduite */
+  height: 48px; /* Taille réduite */
+  margin: 0 auto 0.5rem; /* Centrez l'image et ajoutez un espacement en bas */
+  image-rendering: pixelated; /* Effet pixel art */
+  display: block; /* Assurez-vous que l'image est centrée */
+}
+
+.kibble-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #ffcc00; /* Jaune doré */
+  margin-bottom: 0.5rem;
+}
+
+.kibble-description {
+  font-size: 0.9rem;
+  color: #cccccc; /* Texte gris clair */
+  margin-bottom: 0.5rem;
+}
+
+.kibble-cost {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ffffff; /* Texte blanc */
+  margin-bottom: 0.5rem;
+}
+
+.kibble-buy-btn {
+  font-family: "Press Start 2P", monospace;
+  background-color: #33ff57; /* Vert vif */
+  color: #1a1a2e; /* Texte bleu foncé */
+  border: 2px solid #ffcc00; /* Bordure jaune doré */
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.kibble-buy-btn:hover {
+  background-color: #ffcc00; /* Jaune doré au survol */
+  color: #1a1a2e;
   transform: scale(1.05);
-  box-shadow: 0 0 10px var(--accent);
 }
 
-.kibble-item.active-skin {
-  border-color: lime;
-  box-shadow: 0 0 15px lime;
+#shopToggle {
+  bottom: 2rem; /* Abaissez le bouton pour qu'il soit plus proche du bas */
+  right: 2rem; /* Gardez un espacement cohérent à droite */
+  background-color: #4f46e5; /* Changez le fond en bleu électrique */
+  color: #ffffff; /* Texte blanc pour un bon contraste */
+  border: 2px solid #ffcc00; /* Ajoutez une bordure jaune doré */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Ajoutez une ombre pour le style */
+  padding: 0.8rem; /* Augmentez légèrement le padding pour plus d'espace */
+  border-radius: 50%; /* Gardez le bouton rond */
+  transition: transform 0.2s, background-color 0.2s;
 }
 
-.buy-kibble-btn {
-  transition: background-color 0.2s, transform 0.2s;
+#shopToggle:hover {
+  background-color: #ffcc00; /* Changez le fond en jaune doré au survol */
+  color: #1a1a2e; /* Texte bleu foncé pour un bon contraste */
+  transform: scale(1.1); /* Ajoutez un effet de zoom au survol */
 }
 
-.buy-kibble-btn:active {
-  transform: scale(0.95);
+#resetGameBtn {
+  bottom: 2rem; /* Placez le bouton "Réinitialiser" plus bas */
+  left: 2rem;
 }
 
-/* GIFs */
-.nyancatgif {
-  width: 100%;
-  max-width: 500px;
-  animation: flicker 1.5s infinite;
-}
-
-.nyancatgif {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-/* Boutique */
-aside {
-  background: var(--dark);
-  border: 4px solid var(--accent);
-  box-shadow: 4px 4px var(--shadow);
-  padding: 1rem;
-  color: var(--text);
-}
-
-aside h3 {
-  font-family: "rixvideogame-pro", sans-serif;
-  font-size: 2rem;
-  color: var(--secondary);
-  text-shadow: 2px 2px var(--primary);
-  margin-bottom: 1rem;
-}
-
-aside button {
-  width: 100%;
-  margin-bottom: 1rem;
-}
-
-/* Images */
-img {
-  border: none; /* Supprime toute bordure */
-  outline: none; /* Supprime tout contour */
-  box-shadow: none; /* Supprime toute ombre */
-}
-
-.kibble-animation {
-  all: unset; /* Réinitialise tous les styles */
-  position: absolute;
-  width: 30px;
-  height: 30px;
+/* ==================== */
+/* TOASTS */
+/* ==================== */
+.toast-container {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   pointer-events: none;
+  width: 95%;
+  max-width: 420px;
 }
 
-/* ================== */
-/* DISPOSITION MOBILE */
-/* ================== */
-@media (max-width: 767px) {
-  :root {
-    --header-size: 2rem;
+.toast {
+  padding: 18px 24px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  animation: toastSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+    toastStay 5s linear 0.6s forwards, toastFadeOut 0.6s ease-in 5.6s forwards;
+  opacity: 0;
+  transform: translateY(120px);
+  backdrop-filter: blur(12px);
+  border-left: 8px solid;
+  background: var(--color-bg-dark);
+  border: 2px solid;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.toast-success {
+  color: #d1fae5 !important;
+  border-color: var(--color-success) !important;
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.6);
+}
+
+.toast-error {
+  color: #fee2e2 !important;
+  border-color: var(--color-error) !important;
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.6);
+}
+
+.toast-info {
+  color: #dbeafe !important;
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
+}
+
+.toast-icon {
+  font-size: 1.8rem;
+  min-width: 30px;
+  text-align: center;
+}
+
+.premium-toast {
+  animation: toastSlideIn 0.6s forwards, rainbowGlow 3s linear infinite,
+    toastStay 5s linear 0.6s forwards, toastFadeOut 0.6s ease-in 5.6s forwards;
+}
+
+/* ==================== */
+/* BOUTONS & INTERFACE */
+/* ==================== */
+.upgrade-btn {
+  font-family: "Silkscreen", cursive;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  font-size: 0.9rem;
+  padding: 1rem; /* Augmentez le padding pour plus d'espace */
+  background: #ffcc00; /* Fond jaune doré */
+  color: #1a1a2e; /* Texte bleu foncé */
+  border: 2px solid #4f46e5; /* Bordure bleu électrique */
+  border-radius: 8px;
+  text-align: center; /* Centre le texte */
+  display: flex; /* Utilisez flexbox pour aligner le contenu */
+  flex-direction: column; /* Place le contenu en colonne */
+  justify-content: center; /* Centre verticalement */
+  align-items: center; /* Centre horizontalement */
+  transition: all 0.2s ease;
+  overflow: hidden; /* Empêche le dépassement du texte */
+  word-wrap: break-word; /* Coupe les mots si nécessaire */
+}
+
+.upgrade-btn:hover {
+  background: #4f46e5; /* Fond bleu électrique au survol */
+  color: #ffffff; /* Texte blanc */
+  transform: translateY(-3px);
+}
+
+.upgrade-btn:active {
+  transform: translateY(2px) scale(0.98);
+}
+
+.upgrade-btn:disabled {
+  background: #ff5733; /* Fond orange vif pour les boutons désactivés */
+  color: #ffffff;
+  cursor: not-allowed;
+}
+
+/* ==================== */
+/* LAYOUT RESPONSIVE */
+/* ==================== */
+@media (max-width: 768px) {
+  .nyancatgif {
+    max-width: 320px;
+    animation: float 3s ease-in-out infinite, pulse 1.8s infinite;
   }
 
-  aside {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 10;
-    width: 100%;
-    background: rgba(13, 2, 33, 0.9);
-    backdrop-filter: blur(5px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  #kibbleShop {
+    grid-template-columns: 1fr;
+    gap: 1rem;
     padding: 1rem;
-    border-top: 3px solid var(--accent);
-    border-top-left-radius: 1rem;
-    border-top-right-radius: 1rem;
   }
 
-  main {
-    padding-bottom: 250px;
+  .toast {
+    padding: 14px 20px;
+    font-size: 1.1rem;
+    max-width: 90%;
+  }
+
+  .toast-icon {
+    font-size: 1.5rem;
+  }
+
+  .kibble-particle img {
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  .game-header {
+    margin-top: 5rem; /* Plus d'espace pour les petits écrans */
+  }
+
+  .kibble-image {
+    width: 32px; /* Taille encore plus petite sur mobile */
+    height: 32px;
+  }
+
+  .kibble-item {
+    padding: 0.8rem; /* Réduisez le padding sur mobile */
   }
 }
 
-/* =================== */
-/* DISPOSITION DESKTOP */
-/* =================== */
 @media (min-width: 768px) {
-  aside {
-    width: 300px;
-    height: 100vh;
-    position: sticky;
-    top: 0;
-    background: linear-gradient(to bottom, var(--dark), #1a0933);
-    border-right: 3px solid var(--accent);
-    padding: 2rem;
+  .gamedisplay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 60vh;
   }
 
-  .shop {
-    margin-top: 0;
+  .nyancatgif {
+    max-width: 500px;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
   }
 }
 
+@media (min-width: 1200px) {
+  .nyancatgif {
+    max-width: 600px;
+  }
+}
+/* Affiche le shop en permanence sur desktop */
+@media (min-width: 1024px) {
+  #shopPanel {
+    position: relative; /* Change la position pour qu'il soit intégré au layout */
+    transform: translateX(0); /* Toujours visible */
+    width: 25%; /* Ajustez la largeur pour desktop */
+    max-width: none; /* Supprime la limite de largeur */
+    height: auto; /* Ajuste la hauteur automatiquement */
+    background-color: rgba(20, 20, 30, 0.95); /* Fond sombre */
+    z-index: 1; /* Assurez-vous qu'il est visible */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Ajoute une ombre pour le style */
+  }
 
+  #shopToggle {
+    display: none; /* Cache le bouton "Boutique" sur desktop */
+  }
+
+  #closeShopBtn {
+    display: none; /* Masque le bouton "Retour" sur desktop */
+  }
+}
+
+/* ==================== */
+/* GAME CONTAINER */
+/* ==================== */
+.game-container {
+  height: 100%; /* Assurez-vous que le conteneur principal occupe toute la hauteur */
+}
